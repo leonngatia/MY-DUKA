@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %}sales page{% endblock %}
+{% block content %}
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+  style="background-color: black;color: darkolivegreen;">
+  ADD SALES
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/add_sales" method="POST">
+
+          <select name="pid" class="form-select form-select-lg mb-3" aria-label="Large select example">
+            {%for i in products%}
+
+            <option value={{i[0]}}>{{i[1]}}</option>
+
+            {% endfor %}
+          </select>
+          <input type="number" placeholder="quantity" name="quantity"><br>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<table id="myTable" class="display">
+  <thead>
+
+    <tr>
+      <th>id</th>
+      <th>productid</th>
+      <th>quantity</th>
+      <th>created_at</th>
+
+    </tr>
+  </thead>
+  {%for i in sales%}
+  <tbody>
+    <tr>
+      <td>{{i[0]}}</td>
+      <td>{{i[1]}}</td>
+      <td>{{i[2]}}</td>
+      <td>{{i[3]}}</td>
+
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+
+
+
+{% endblock %}
